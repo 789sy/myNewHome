@@ -1,0 +1,76 @@
+//
+//  myNewHome.pch
+//  myNewHome
+//
+//  Created by user on 16/5/3.
+//  Copyright (c) 2016年 teamwin-hkh. All rights reserved.
+//
+
+#ifndef myNewHome_myNewHome_pch
+#define myNewHome_myNewHome_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CoreData/CoreData.h>
+
+#pragma mark ----------------------------- Config
+#import "classes/Constant/Constant.h"
+#pragma mark - Common
+#import "hkLogger.h"
+#import "GCDAsyncSocket.h"
+#import "GCDAsyncUdpSocket.h"
+
+#pragma mark ----------------------------- UI
+//#import "AppDelegate.h"
+
+#pragma mark ----------------------------- others
+#import "NSObject+BoardManage.h"
+#import <YTKKeyValueStore/YTKKeyValueStore.h>       //数据库
+#import "sqlite3.h"                                 //
+
+//===================================================================================================
+#define APP_DELEGATE (AppDelegate*)[[UIApplication sharedApplication] delegate]
+
+typedef NS_ENUM(NSUInteger, AlarmDays){
+    Mon = 1,
+    Tuse = 1<<1,
+    Wed = 1<<2,
+    Thur = 1<<3,
+    Fri = 1<<4,
+    Sat = 1<<5,
+    Sun = 1<<6,
+    WeekDay = Mon|Tuse|Wed|Thur|Fri,
+    Weekend = Sat|Sun,
+    EveryDay = Mon|Tuse|Wed|Thur|Fri|Sat|Sun
+};
+typedef NS_ENUM(NSUInteger, RingType){
+    RingTypeRing = 1,
+    RingTypeVibrate = 1<<1
+};
+
+typedef NS_ENUM(NSUInteger, AlarmType){
+    AlarmTypeDefault = 0,
+    AlarmTypeReminder,
+    AlarmTypeCountDown,
+    AlarmTypeAbnormal
+};
+
+//判断 IOS 版本和尺寸
+#define IOS6  (([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)? YES:NO)
+#define IOS7  (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)? YES:NO)
+#define VIEWFRAME_INCREMENT (IOS7?64:0)
+#define STATUS_INCREMENT (IOS7?20:0)
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define CONTENT_VIEW_HEIGHT ([UIScreen mainScreen].bounds.size.height)-64
+
+#define HourToSec 3600
+#define DayToSec 24*3600
+#define WeekTosec 7*24*3600
+
+#endif
+#endif
